@@ -1,18 +1,24 @@
 'use client'
 import { pagesList } from '@/data/data';
+import { selectCartItems, selectWishlistItems } from '@/features/cart/cartSelector';
+import { useAppSelector } from '@/store/hooks';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, User, UserCircle, X } from 'lucide-react';
+import { Heart, Menu, ShoppingBag, X } from 'lucide-react';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 const Header = () => {
 
+    const cartItems = useAppSelector(selectCartItems);
+    const wishlistItems = useAppSelector(selectWishlistItems);
+
     const pathname = usePathname();
-    const [visible, setVisible] = useState(false)
+    const [visible, setVisible] = useState(false);
+
 
     return (
-
+    <>
         <header className="bg-white shadow-sm sticky top-0 z-10">
             <div className="container mx-auto px-4 py-3 flex justify-between items-center">
                 <div className="flex items-center space-x-2">
@@ -31,12 +37,18 @@ const Header = () => {
                 <nav className="hidden md:flex space-x-8">
                     {
                         pagesList.map((item) => (
-                            <Link key={item.id} href={item.link} className={`hover:text-[#F0B100] transition duration-150 ease-in-out ${pathname === item.link ? "text-[#F0B100]" : "text-gray-700"}`}>{item.title}</Link>
+                            <Link key={item.id} href={item.link} className={`hover:text-[#F0B100] transition duration-150 ease-in-out ${pathname === item.link ? "text-[#F0B100]" : "text-gray-700"}`}>
+                                {item.title}
+                            </Link>
                         ))
                     }
-                    <Link href="/login" className='flex items-center gap-1 text-green-600 hover:text-green-500 cursor-pointer'>
-                        <UserCircle/>
-                        <h1>Login</h1>
+                    <Link href={'/wishlist'} className='cursor-pointer text-green-600 hover:text-green-500 transition duration-300 ease-in-out relative'>
+                        <Heart size={20}/>
+                        <span className="text-[12px] font-semibold absolute -top-2 -right-3 bg-white text-black size-5 border border-green-700 text-center rounded-full">{wishlistItems.length ?? 0}</span>
+                    </Link>
+                    <Link href={'/cart'} className='cursor-pointer text-green-600 hover:text-green-500 transition duration-300 ease-in-out relative'>
+                        <ShoppingBag size={20}/>
+                        <span className="text-[12px] font-semibold absolute -top-2 -right-3 bg-white text-black size-5 border border-green-700 text-center rounded-full">{cartItems.length ?? 0}</span>
                     </Link>
                 </nav>
 
@@ -73,6 +85,7 @@ const Header = () => {
                 }
             </AnimatePresence>
         </header>
+    </>
 
     )
 }

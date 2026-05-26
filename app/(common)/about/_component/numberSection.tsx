@@ -1,5 +1,5 @@
 import Image from "next/image";
-import image from "@/sources/about/fn-bg.png";
+import image from "@/src/about/fn-bg.png";
 import CountUp from "./CountUp";
 
 const NumberSection = () => {

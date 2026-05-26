@@ -1,9 +1,9 @@
 import * as React from "react";
-import clientImg1 from "@/sources/home/client-1.webp";
-import clientImg2 from "@/sources/home/client-2.webp";
-import clientImg3 from "@/sources/home/client-3.webp";
-import clientImg4 from "@/sources/home/client-4.webp";
-import clientImg5 from "@/sources/home/client-5.webp";
+import clientImg1 from "@/src/home/client-1.webp";
+import clientImg2 from "@/src/home/client-2.webp";
+import clientImg3 from "@/src/home/client-3.webp";
+import clientImg4 from "@/src/home/client-4.webp";
+import clientImg5 from "@/src/home/client-5.webp";
 import {
   Carousel,
   CarouselContent,

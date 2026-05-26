@@ -1,16 +1,89 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Heart, ShoppingCart, User } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { productData } from '@/data/data'
+import { useAppDispatch } from '@/store/hooks';
+import { addToCart } from '@/features/cart/cartSlice';
+import product1 from "@/src/products/pro1.jpg"
+import fallBackImage from "@/src/products/fallBack.jpg";
+import { IProductDTO } from '@/features/cart/cartTypes';
+import { IWishlist } from '@/features/wishlist/wishlistType'
+import { addToWishlist } from '@/features/wishlist/wishlistSlice'
 
 const ProductList = () => {
-    const [tabValues, setTabValues] = useState("")
+    const dispatch = useAppDispatch();
+    const [tabValues, setTabValues] = useState("");
+    const [products, setProducts] = useState<IProductDTO[]>([]);
+   async function getData(): Promise<IProductDTO[]> {
+        return [
+            {
+            id: "728ed52f",
+            price: 10,
+            image: product1,
+            name:"Apple",
+            description: "Apple",
+            stockStatus:"IN_STOCK"
+        },
+        {
+            id: "728ed522",
+            price: 200,
+            image: product1,
+            name:"Orange",
+            description: "orange",
+            stockStatus:"IN_STOCK"
+        },
+        {
+            id: "728ed523",
+            price: 30,
+            image: product1,
+            name:"Banana",
+            description: "Banana",
+            stockStatus:"OUT_OF_STOCK"
+        },
+        {
+            id: "728ed524",
+            price: 90,
+            image: product1,
+            name:"Mango",
+            description: "Sample Product",
+            stockStatus:"OUT_OF_STOCK"
+        },
+        {
+            id: "728ed525",
+            price: 500,
+            image: product1,
+            name:"Apple",
+            description: "Sample Product",
+            stockStatus:"IN_STOCK"
+            },
+        ]
+        };
 
+    const loadProductList = async() => {
+        try {
+            const data = await getData();
+            setProducts(data)
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
+    useEffect(()=>{
+        loadProductList()
+    },[])
+
+    const handleAddToCart = (items :IProductDTO) => {
+        dispatch(addToCart(items));
+    };
+
+    const handleAddToWishlist = (items :IWishlist) => {
+        dispatch(addToWishlist(items));
+    };
 
     return (
         <div>
@@ -23,7 +96,7 @@ const ProductList = () => {
                 <TabsContent onClick={() => setTabValues("snacks")} value="snacks">
                     <div className="p-1 grid xl:grid-cols-4 lg:grid-cols-3  md:grid-cols-2 grid-cols-1 items-center justify-center ">
                         {
-                            productData.slice(0, 9).map((item, idx) => (
+                            products.slice(0, 9).map((item, idx) => (
                                 <div
                                     key={idx}
                                     className="m-6 relative overflow-hidden rounded-lg max-w-75 shadow-lg
@@ -39,20 +112,22 @@ const ProductList = () => {
                                     <div className="relative pt-10 px-10 flex items-center justify-center cursor-pointer">
                                         <Image
                                             className="relative h-fit"
-                                            src={item.img}
+                                            src={item.image ?? fallBackImage}
                                             alt=""
                                         />
                                     </div>
                                     <div className="relative text-white px-6 pb-6 mt-6">
                                         <div className="flex justify-between">
-                                            <span className="block font-semibold text-xl text-black">{item.title}</span>
+                                            <span className="block font-semibold text-xl text-black">{item.name}</span>
                                             <span className="bg-white text-lg rounded-full text-green-500 font-bold px-3 py-2 leading-none flex items-center">₹{item.price}</span>
                                         </div>
                                     </div>
+
                                     <div className="absolute -top-15 group-hover:translate-y-14 left-0 w-full transition-transform duration-400 ease-in-out bg-green-400 flex items-center justify-center">
                                         <Tooltip>
                                             <TooltipTrigger>
-                                                <Button type='button' size={'icon'} className="w-10 m-2 cursor-pointer hover:bg-white hover:text-green-400 h-10 bg-green-500 text-white py-3 font-semibold rounded-full border border-white">
+                                                <Button type='button' size={'icon'} className="w-10 m-2 cursor-pointer hover:bg-white hover:text-green-400 h-10 bg-green-500 text-white py-3 font-semibold rounded-full border border-white"
+                                                onClick={()=>handleAddToCart(item)}>
                                                     <ShoppingCart />
                                                 </Button>
                                             </TooltipTrigger>
@@ -62,7 +137,11 @@ const ProductList = () => {
                                         </Tooltip>
                                         <Tooltip>
                                             <TooltipTrigger>
-                                                <Button type='button' size={'icon'} className="w-10 m-2 cursor-pointer hover:bg-white hover:text-green-400 h-10 bg-green-500 text-white py-3 font-semibold rounded-full border border-white">
+                                                <Button 
+                                                    type='button' 
+                                                    size={'icon'} 
+                                                    onClick={()=>handleAddToWishlist(item)}
+                                                    className="w-10 m-2 cursor-pointer hover:bg-white hover:text-green-400 h-10 bg-green-500 text-white py-3 font-semibold rounded-full border border-white">
                                                     <Heart />
                                                 </Button>
                                             </TooltipTrigger>
@@ -81,7 +160,7 @@ const ProductList = () => {
                 <TabsContent value="cosmetics" onClick={() => setTabValues("snacks")}>
                     <div className="p-1 grid xl:grid-cols-4 lg:grid-cols-3  md:grid-cols-2 grid-cols-1 items-center justify-center ">
                         {
-                            productData.slice(0, 9).map((item, idx) => (
+                            products.slice(0, 9).map((item, idx) => (
                                 <div
                                     key={idx}
                                     className="m-6 relative overflow-hidden rounded-lg max-w-75 shadow-lg
@@ -97,13 +176,13 @@ const ProductList = () => {
                                     <div className="relative pt-10 px-10 flex items-center justify-center cursor-pointer">
                                         <Image
                                             className="relative h-fit"
-                                            src={item.img}
+                                            src={item.image ?? fallBackImage}
                                             alt=""
                                         />
                                     </div>
                                     <div className="relative text-white px-6 pb-6 mt-6">
                                         <div className="flex justify-between">
-                                            <span className="block font-semibold text-xl text-black">{item.title}</span>
+                                            <span className="block font-semibold text-xl text-black">{item.name}</span>
                                             <span className="bg-white text-lg rounded-full text-green-500 font-bold px-3 py-2 leading-none flex items-center">₹{item.price}</span>
                                         </div>
                                     </div>

@@ -1,16 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import discountImg01 from "@/sources/home/dis-1.webp";
-import discountImg02 from "@/sources/home/dis-2.webp";
-import discountImg03 from "@/sources/home/dis-3.webp";
-import offerImg01 from "@/sources/home/offer-1.webp";
-import offerImg02 from "@/sources/home/offer-2.webp";
-import offerImg03 from "@/sources/home/offer-3.webp";
-import offerImg04 from "@/sources/home/offer-4.webp";
-import offerImg05 from "@/sources/home/offer-5.webp";
-import hero from "@/sources/home/hero.webp";
-import cto from "@/sources/home/cet.webp";
+import discountImg01 from "@/src/home/dis-1.webp";
+import discountImg02 from "@/src/home/dis-2.webp";
+import discountImg03 from "@/src/home/dis-3.webp";
+import offerImg01 from "@/src/home/offer-1.webp";
+import offerImg02 from "@/src/home/offer-2.webp";
+import offerImg03 from "@/src/home/offer-3.webp";
+import offerImg04 from "@/src/home/offer-4.webp";
+import offerImg05 from "@/src/home/offer-5.webp";
+import hero from "@/src/home/hero.webp";
+import cto from "@/src/home/cet.webp";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Clients } from "@/components/custom/Clients";
@@ -74,7 +74,7 @@ export default function Home() {
               mass: 1,
               delay: 1,
             }}
-            href="/contact"
+            href="#"
             className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-bold md:text-xl text-lg md:px-10 px-5 md:py-4 py-2 rounded-full transition">
             Contact Us
           </motion.a>
