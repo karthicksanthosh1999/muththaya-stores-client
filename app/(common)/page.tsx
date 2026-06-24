@@ -74,7 +74,7 @@ export default function Home() {
               mass: 1,
               delay: 1,
             }}
-            href="#"
+            href="/contact"
             className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-bold md:text-xl text-lg md:px-10 px-5 md:py-4 py-2 rounded-full transition">
             Contact Us
           </motion.a>

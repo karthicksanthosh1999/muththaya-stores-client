@@ -28,13 +28,13 @@ export const useRegisterMutation = () => {
 
     onError: (error) => {
       console.log(error);
-      toast.error(
-        error.response?.data?.message ||
-          "Invalid Credentials",
-          {
-           id:"regiser"
-          }
-      );
+    //   toast.error(
+    //     error.response?.data?.message ||
+    //       "Invalid Credentials",
+    //       {
+    //        id:"regiser"
+    //       }
+    //   );
     },
     })
 }
