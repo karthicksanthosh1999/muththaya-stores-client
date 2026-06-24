@@ -1,10 +1,10 @@
 
-import productImage1 from "@/sources/products/pro1.jpg"
-import productImage2 from "@/sources/products/pro2.jpg"
-import productImage3 from "@/sources/products/pro3.jpg"
-import productImage4 from "@/sources/products/pro4.jpg"
-import productImage5 from "@/sources/products/pro5.jpg"
-import productImage6 from "@/sources/products/pro6.jpg"
+import productImage1 from "@/src/products/pro1.jpg"
+import productImage2 from "@/src/products/pro2.jpg"
+import productImage3 from "@/src/products/pro3.jpg"
+import productImage4 from "@/src/products/pro4.jpg"
+import productImage5 from "@/src/products/pro5.jpg"
+import productImage6 from "@/src/products/pro6.jpg"
 
 export const pagesList = [
     {

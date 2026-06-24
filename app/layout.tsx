@@ -27,16 +27,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   
-const queryClient = new QueryClient()
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-           <QueryClientProvider client={queryClient}>
+  
           <ReduxProviders>
             {children}
             <Toaster position="top-right"/>
           </ReduxProviders>
-           </QueryClientProvider>
         </body>
     </html>
   );

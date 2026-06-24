@@ -1,8 +1,8 @@
 import React from "react";
-import serviceImage1 from "@/sources/home/service-1.webp";
-import serviceImage2 from "@/sources/home/service-2.webp";
-import serviceImage3 from "@/sources/home/service-3.webp";
-import serviceImage4 from "@/sources/home/service-4.webp";
+import serviceImage1 from "@/src/home/service-1.webp";
+import serviceImage2 from "@/src/home/service-2.webp";
+import serviceImage3 from "@/src/home/service-3.webp";
+import serviceImage4 from "@/src/home/service-4.webp";
 import Image from "next/image";
 
 const ServiceSection = () => {

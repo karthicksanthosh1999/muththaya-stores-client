@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import image from "@/sources/header/bg-page-title.jpg";
+import image from "@/src/header/bg-page-title.jpg";
 import { motion } from "framer-motion";
 
 type TProps = {
